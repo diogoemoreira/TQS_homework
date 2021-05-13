@@ -33,6 +33,11 @@ public class AirQualityController {
         mv.addObject("lon", service.getCity().getLon());
         mv.addObject("time", service.getCity().getTime());
         //forecast information
+        int minForecastDays = service.getCity().getMinForecast();
+        String avg,min,max,day; //save the forecast data
+
+        //only show forecast info of minForecastDays (e.g. 3 days ahead)
+        
 
         return "";
     }

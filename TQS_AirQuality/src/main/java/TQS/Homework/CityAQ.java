@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CityAQ {
-    private String name; //data.city.name
-    private Float lat; //data.city.geo[0]
-    private Float lon; //data.city.geo[1]
-    private String time; //data.time.iso
-    private ArrayList<String> o3; //data.forecast.daily.o3
-    private ArrayList<String> pm10; //data.forecast.daily.pm10
-    private ArrayList<String> pm25; //data.forecast.daily.pm25
-    private ArrayList<String> uvi; //data.forecast.daily.uvi
-    private int minForecast;
+    private String name;
+    private Float lat;
+    private Float lon;
+    private String time; 
+
+    //avg,min,max,day and repeat
+    private ArrayList<String> o3;  //       {"avg":34, "min":28, "max":39,"day":"2021-05-13","avg":33,...}
+    private ArrayList<String> pm10;//from here ^             to here                 ^ is one day of forecast
+    private ArrayList<String> pm25;
+    private ArrayList<String> uvi; 
+
+    private int minForecast; //used to know which has the min number of days between o3,pm10,pm25,uvi
 
     public CityAQ(){
     }
@@ -78,7 +81,7 @@ public class CityAQ {
     }
 
     public void setO3(String o3) {
-        this.o3 = (ArrayList<String>) Arrays.asList(o3.substring(1,o3.length()-1).replaceAll("\\{|\\}", "").split(",")); //avg,min,max,day and repeat
+        this.o3 = (ArrayList<String>) Arrays.asList(o3.substring(1,o3.length()-1).replaceAll("\\{|\\}", "").split(","));
     }
 
     public void setPm10(String pm10) {
