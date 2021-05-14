@@ -31,6 +31,7 @@ public class AirQualityRestControllerIT {
                 .statusCode(404);
     }
 
+    @DisplayName("Statistics")
     @Test
     void getStatistics(){
         RestAssured.given().port(port).get("/api/stats")

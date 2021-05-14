@@ -15,9 +15,7 @@
 
 		<!-- Loading main css file -->
 		<link rel="stylesheet"  th:href="@{/style.css}" href="../static/style.css"	>
-
 	</head>
-
 
 	<body>
 		
@@ -39,13 +37,12 @@
 
 			<div class="hero" th:style="'background-image:url(' + @{/images/banner.png} + ');'" data-bg-image="../static/images/banner.png">
 				<div class="container">
-					<form method="GET" action="#" class="find-location">
+					<form id="search" method="GET" class="find-location">
 						<label>
-							<input type="text" placeholder="Find your location...">
+							<input type="text" id="cityToFind" placeholder="Find your location...">
 						</label>
-						<input type="submit" value="Find">
+						<button type="button" onclick="location.replace('/search/'+document.getElementById('cityToFind').value)" class="buttonsubmit" >Find</button>
 					</form>
-
 				</div>
 			</div>
 
@@ -94,7 +91,7 @@
 				</div>
 			</footer>
 		</div>
-		
+
 	</body>
 
 </html>

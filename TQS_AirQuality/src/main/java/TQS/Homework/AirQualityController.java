@@ -31,6 +31,8 @@ public class AirQualityController {
     public ModelAndView home(){
         Logging.writeToFile();
         ModelAndView mv=new ModelAndView("index");
+        //no forecast
+        mv.addObject("cityName", "No City Found");
         return mv;
     }
 
@@ -54,6 +56,9 @@ public class AirQualityController {
                 logger.info("Number of requests: "+localCache.getCountOfReq());
                 logger.info("Number of Hits: "+localCache.getHits());
                 logger.info("Number of Misses: "+localCache.getMisses());
+
+                //no forecast
+                mv.addObject("cityName", "No City Found");
                 return mv;
             }
             cityaq = service.getCity();

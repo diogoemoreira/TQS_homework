@@ -39,9 +39,9 @@ class AirQualityRestControllerUnitTest {
     @Test
     void getCityInfo() throws Exception {
         //Mock returns
-        when(cache.hasCity(Mockito.anyString())).thenReturn(false);
-        when(service.searchCity(Mockito.anyString())).thenReturn(true);
-        when(service.getCity()).thenReturn(cityAQ);
+            when(cache.hasCity(Mockito.anyString())).thenReturn(false);
+            when(service.searchCity(Mockito.anyString())).thenReturn(true);
+            when(service.getCity()).thenReturn(cityAQ);
 
         //
         mvc.perform(get("/api/search/lisbon"))
