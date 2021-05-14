@@ -8,22 +8,31 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LogManager {
-    private Map<String, ArrayList<String>> logs = new LinkedHashMap<String, ArrayList<String>>();
-
+    private Map<String, CityAQ> logs = new LinkedHashMap<String, CityAQ>();
     private int countOfReq = 0;
 
     LogManager(){ }
 
-    public void addLog(String location,String log){
-        countOfReq++;
+    public void addLog(String location,CityAQ city){
         if(!logs.containsKey(location)){
-            logs.put(location, new ArrayList<String>());
+            logs.put(location, city);
         }
-        logs.get(location).add(log);
+    }
+
+    public boolean hasCity(String location){
+        return logs.containsKey(location);
+    }
+
+    public CityAQ retrieveCity(String location){
+        return logs.get(location);
     }
 
     public int getCountOfReq() {
         return countOfReq;
+    }
+
+    public void addCount(){
+        this.countOfReq++;
     }
     
 }
