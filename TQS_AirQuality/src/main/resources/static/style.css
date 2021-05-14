@@ -1293,23 +1293,3 @@ form textarea {
   width: 21px;
   height: 21px;
 }
-
-.logs-container{
-  background: #323544;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 10px;
-  margin-bottom: 50px;
-}
-.logs-container .logs-header {
-  background: rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  text-align: center;
-  font-weight: 800;
-}
-
-.logs-container .logs-content{
-  text-align: center;
-  padding-top: 30px;
-  padding-bottom: 30px;
-}

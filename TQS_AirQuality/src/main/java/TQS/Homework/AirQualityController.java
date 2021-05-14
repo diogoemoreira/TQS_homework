@@ -1,7 +1,7 @@
 package TQS.Homework;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +18,16 @@ public class AirQualityController {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired
-    LogManager logs;
+    LocalCache localCache;
 
     @Autowired
     CityAqService service;
 
-    private static final Logger logger = LoggerFactory.getLogger(AirQualityController.class);
+    private static final Logger logger = Logging.getLogger();
 
     @GetMapping("/")
     public ModelAndView home(){
+        Logging.writeToFile();
         ModelAndView mv=new ModelAndView("index");
         return mv;
     }
@@ -34,21 +35,21 @@ public class AirQualityController {
     @GetMapping("/search/{city}")
     public ModelAndView getCityInfo(@PathVariable(value = "city") String city) throws ParseException {
         //call service method to get the new city
+
         ModelAndView mv = new ModelAndView("index");
         CityAQ cityaq;
 
-        if(logs.hasCity(city)) {
-            cityaq = logs.retrieveCity(city);
-            logger.info("Used local-cache for city aq");
-            logger.info("TTL: "+(logs.getTTL()-logs.getCityTTL(city)));
+        if(localCache.hasCity(city)) {
+            cityaq = localCache.retrieveCity(city);
+            logger.info("Used local-cache for city aq: "+ city);
         }
         else {
             if(!service.searchCity(city)) {
-                logger.error("FAILED TO GET CITY");
+                logger.info("FAILED TO GET CITY");
                 return mv;
             }
             cityaq = service.getCity();
-            logs.addLog(city,cityaq);
+            localCache.addLog(city,cityaq);
         }
 
         logger.info(cityaq.toString());
@@ -85,8 +86,8 @@ public class AirQualityController {
 
         mv.addObject("forecastStats", forecast);
 
-        logs.addCount(); //increments number of requests
-        logger.info("Number of requests: "+logs.getCountOfReq());
+        localCache.addCount(); //increments number of requests
+        logger.info("Number of requests: "+localCache.getCountOfReq());
         //only show forecast info of minForecastDays (e.g. 3 days ahead)
         return mv;
     }
