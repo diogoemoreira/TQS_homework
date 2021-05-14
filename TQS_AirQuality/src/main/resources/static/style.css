@@ -9,6 +9,7 @@ header {
   display: block; }
 
 html {
+  font-size: 14px;
   background: #fff;
   color: #000;
   -webkit-text-size-adjust: 100%;
@@ -28,6 +29,8 @@ html, body {
 }
 
 a {
+  text-decoration: none;
+  color: #009ad8;
   background: transparent; }
   a:focus {
     outline: thin dotted; }
@@ -156,8 +159,6 @@ table {
 /*
  * Global Styles
  */
-html {
-  font-size: 14px; }
 
 body {
   color: #bfc1c8;
@@ -179,10 +180,6 @@ hr {
 ul, ol {
   margin: 0;
   padding-left: 0; }
-
-a {
-  text-decoration: none;
-  color: #009ad8; }
 
 address {
   font-style: normal; }

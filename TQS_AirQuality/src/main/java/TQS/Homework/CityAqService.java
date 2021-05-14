@@ -1,6 +1,5 @@
 package TQS.Homework;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,8 +9,7 @@ import org.json.*;
 public class CityAqService {
     private CityAQ cityaq;
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private RestTemplate restTemplate = new RestTemplate();
 
     public Boolean searchCity(String city){
         try {

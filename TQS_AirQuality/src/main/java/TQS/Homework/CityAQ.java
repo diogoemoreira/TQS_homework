@@ -1,6 +1,5 @@
 package TQS.Homework;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +9,6 @@ public class CityAQ {
     private Float lat;
     private Float lon;
     private String time;
-
 
     //avg,min,max,day and repeat
     private List<String> o3;  //{"avg":34, "min":28, "max":39,"day":"2021-05-13","avg":33,...}
@@ -110,8 +108,8 @@ public class CityAQ {
 
     @Override
     public String toString() {
-        return "City: [lat=" + lat + ", lon=" + lon + ", name=" + name + ", o3=" + o3 + ", pm10=" + pm10
-                + ", pm25=" + pm25 + ", time=" + time + ", uvi=" + uvi + "]";
+        return "CityAQ:{aqi:"+ aqi +", lat:" + lat + ", lon:" + lon + ", name:" + name + ", o3:" + o3 + ", pm10:" + pm10
+                + ", pm25:" + pm25 + ", time:" + time + ", uvi:" + uvi + "}";
     }
 
 }

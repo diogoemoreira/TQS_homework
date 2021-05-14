@@ -1,25 +1,28 @@
 package TQS.Homework;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.TimeUnit;
+
+@Service
 public class LocalCache {
-    private TtlHashMap<String, CityAQ> logs = new TtlHashMap<>(TimeUnit.SECONDS, 20);
+    private int ttl=20;
+    private static TtlHashMap<String, CityAQ> logs;
     private int countOfReq = 0;
+    private int hits = 0;
+    private int misses = 0;
 
-    LocalCache(){ }
+    LocalCache(){
+        logs = new TtlHashMap<>(TimeUnit.SECONDS, this.ttl);
+    }
 
-    public void addLog(String location,CityAQ city){
+    LocalCache(int newttl){
+        logs = new TtlHashMap<>(TimeUnit.SECONDS, newttl);
+    }
+
+    public void addCache(String location, CityAQ city){
         if(!logs.containsKey(location)){
+            hits++;
             logs.put(location, city);
         }
     }
@@ -29,6 +32,7 @@ public class LocalCache {
     }
 
     public CityAQ retrieveCity(String location){
+        hits++;
         return logs.get(location);
     }
 
@@ -38,6 +42,17 @@ public class LocalCache {
 
     public void addCount(){
         this.countOfReq++;
+    }
+
+    public int getMisses(){
+        return this.misses;
+    }
+    public void missed(){
+        this.misses++;
+    }
+
+    public int getHits(){
+        return this.hits;
     }
     
 }

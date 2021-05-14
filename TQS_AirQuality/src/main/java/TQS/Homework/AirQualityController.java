@@ -3,6 +3,8 @@ package TQS.Homework;
 
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +19,8 @@ import java.util.Map;
 public class AirQualityController {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    LocalCache localCache = new LocalCache();
+    @Autowired
+    LocalCache localCache;
 
     @Autowired
     CityAqService service;
@@ -44,11 +47,17 @@ public class AirQualityController {
         }
         else {
             if(!service.searchCity(city)) {
-                logger.info("FAILED TO GET CITY");
+                logger.info("FAILED TO GET CITY "+city);
+
+                localCache.missed();
+                localCache.addCount(); //increments number of requests
+                logger.info("Number of requests: "+localCache.getCountOfReq());
+                logger.info("Number of Hits: "+localCache.getHits());
+                logger.info("Number of Misses: "+localCache.getMisses());
                 return mv;
             }
             cityaq = service.getCity();
-            localCache.addLog(city,cityaq);
+            localCache.addCache(city,cityaq);
         }
 
         logger.info(cityaq.toString());
@@ -87,6 +96,8 @@ public class AirQualityController {
 
         localCache.addCount(); //increments number of requests
         logger.info("Number of requests: "+localCache.getCountOfReq());
+        logger.info("Number of Hits: "+localCache.getHits());
+        logger.info("Number of Misses: "+localCache.getMisses());
         //only show forecast info of minForecastDays (e.g. 3 days ahead)
         return mv;
     }

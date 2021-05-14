@@ -1,0 +1,2 @@
+mai 14, 2021 6:28:48 DA TARDE TQS.Homework.AirQualityController getCityInfo
+INFO: City: [lat=null, lon=null, name=lisbon, o3=null, pm10=null, pm25=null, time=null, uvi=null]
