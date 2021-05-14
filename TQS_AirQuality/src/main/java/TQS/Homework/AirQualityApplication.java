@@ -23,7 +23,7 @@ public class AirQualityApplication {
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
 	}
-
+/*
     @Bean
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
 		return args -> {
@@ -32,9 +32,9 @@ public class AirQualityApplication {
 
             JSONObject obj = new JSONObject(location);
 
-            log.info(""+obj.getJSONObject("data").getJSONObject("forecast").getJSONObject("daily").get("o3").toString().substring(1).replaceAll("\\{|\\}", "").split(",")[4]);
+            log.info(""+obj.getJSONObject("data").get("aqi").toString());
 		};
 	}
-    
+   */
 }
 

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+		
+		<title>Air Quality</title>
+
+		<!-- Loading third party fonts -->
+		<link th:href="@{http://fonts.googleapis.com/css?family=Roboto:300,400,700|}" href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+		<link th:href="@{/fonts/font-awesome.min.css}" href="../static/fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<!-- Loading main css file -->
+		<link rel="stylesheet"  th:href="@{/style.css}" href="../static/style.css"	>
+
+	</head>
+
+
+	<body>
+		
+		<div class="site-content">
+			<div class="site-header">
+				<div class="container">
+					<a href="index.html" class="branding">
+						<img th:src="@{/images/logo.png}" alt="" class="logo">
+						<div class="logo-type">
+							<h1 class="site-title">AirQuality</h1>
+							<small class="site-description">TQS Homework</small>
+						</div>
+					</a>
+
+					<div class="mobile-navigation"></div>
+
+				</div>
+			</div> <!-- .site-header -->
+
+			<div class="hero" th:style="'background-image:url(' + @{/images/banner.png} + ');'" data-bg-image="../static/images/banner.png">
+				<div class="container">
+					<form method="GET" action="#" class="find-location">
+						<label>
+							<input type="text" placeholder="Find your location...">
+						</label>
+						<input type="submit" value="Find">
+					</form>
+
+				</div>
+			</div>
+
+
+			<div class="forecast-table">
+				<div class="container">
+					<div class="forecast-container">
+						<div class="today forecast">
+							<div class="forecast-header">
+								<div th:text="${cityDate}" class="day"></div>
+							</div> <!-- .forecast-header -->
+							<div class="forecast-content">
+								<div class="location" th:text="${cityName}"></div>
+								<div class="degree">
+									<div class="num" th:text="${cityAqi}+ 'AQI'"></div>
+									<div class="forecast-icon">
+										<img th:src="@{/images/icons/icon-8.svg}" alt="" width=90>
+									</div>
+								</div>
+								<img class="aqStats" th:src="@{/images/o3.png}"><span th:text=" ${cityO3}+' o3'"></span>
+								<img class="aqStats" th:src="@{/images/pm.png}"><span th:text=" ${cityPm10}+' pm10'"></span>
+								<img class="aqStats" th:src="@{/images/pm.png}"><span th:text=" ${cityPm25}+' pm25'"></span>
+								<img class="aqStats" th:src="@{/images/uv.png}"><span th:text=" ${cityUvi}+' uvi'"></span>
+							</div>
+						</div>
+
+						<div class="forecast" th:each="entry: ${forecastStats}">
+							<div class="forecast-header">
+								<div class="day" th:text="${entry.key}"></div>
+							</div> <!-- .forecast-header -->
+							<div class="forecast-content">
+								<div><img class="aqStats" th:src="@{/images/o3.png}"><span th:text=" ${entry.value[0]}+' o3'"></span></div>
+								<div><img class="aqStats" th:src="@{/images/pm.png}"><span th:text=" ${entry.value[1]}+' pm10'"></span></div>
+								<div><img class="aqStats" th:src="@{/images/pm.png}"><span th:text=" ${entry.value[2]}+' pm25'"></span></div>
+								<div><img class="aqStats" th:src="@{/images/uv.png}"><span th:text=" ${entry.value[3]}+' uvi'"></span></div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div class="container">
+				<div class="logs-container">
+					<div class="logs-header">
+						<div class="day">Logs</div>
+					</div>
+					<div class="logs-content">
+						<p> Logs will go here</p>
+					</div>
+				</div>
+
+			</div>
+
+
+			<footer class="site-footer">
+				<div class="container">
+					<p>Work done by Diogo Moreira 93127</p>
+				</div>
+			</footer>
+		</div>
+		
+	</body>
+
+</html>
