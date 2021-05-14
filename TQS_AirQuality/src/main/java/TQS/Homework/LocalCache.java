@@ -12,7 +12,6 @@ import java.util.logging.SimpleFormatter;
 
 import org.springframework.stereotype.Service;
 
-@Service
 public class LocalCache {
     private TtlHashMap<String, CityAQ> logs = new TtlHashMap<>(TimeUnit.SECONDS, 20);
     private int countOfReq = 0;

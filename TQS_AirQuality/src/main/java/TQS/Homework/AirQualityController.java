@@ -17,8 +17,7 @@ import java.util.Map;
 public class AirQualityController {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    @Autowired
-    LocalCache localCache;
+    LocalCache localCache = new LocalCache();
 
     @Autowired
     CityAqService service;
