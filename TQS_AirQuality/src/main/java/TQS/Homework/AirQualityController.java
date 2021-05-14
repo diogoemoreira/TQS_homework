@@ -37,14 +37,16 @@ public class AirQualityController {
         ModelAndView mv = new ModelAndView("index");
         CityAQ cityaq;
 
-        if(!service.searchCity(city)) {
-            logger.error("FAILED TO GET CITY");
-            return mv;
-        }
-
-        if(logs.hasCity(city))
+        if(logs.hasCity(city)) {
             cityaq = logs.retrieveCity(city);
+            logger.info("Used local-cache for city aq");
+            logger.info("TTL: "+(logs.getTTL()-logs.getCityTTL(city)));
+        }
         else {
+            if(!service.searchCity(city)) {
+                logger.error("FAILED TO GET CITY");
+                return mv;
+            }
             cityaq = service.getCity();
             logs.addLog(city,cityaq);
         }
