@@ -9,7 +9,7 @@ import org.json.*;
 public class CityAqService {
     private CityAQ cityaq;
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
 
     public Boolean searchCity(String city){
         try {

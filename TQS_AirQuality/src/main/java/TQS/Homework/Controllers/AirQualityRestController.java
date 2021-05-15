@@ -3,7 +3,6 @@ package TQS.Homework.Controllers;
 import TQS.Homework.CityAQ;
 import TQS.Homework.CityAqService;
 import TQS.Homework.LocalCache;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,15 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
 public class AirQualityRestController {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired
     LocalCache localCache;
@@ -40,7 +36,7 @@ public class AirQualityRestController {
     }
 
     @GetMapping("/search/{city}")
-    public ResponseEntity<Object> getCityInfo(@PathVariable(value = "city") String city) throws ParseException {
+    public ResponseEntity<Object> getCityInfo(@PathVariable(value = "city") String city) {
         //call service method to get the new city
         CityAQ cityaq;
 

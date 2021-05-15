@@ -8,8 +8,6 @@ import TQS.Homework.CityAqService;
 import TQS.Homework.LocalCache;
 import TQS.Homework.Logging;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -94,7 +92,7 @@ public class AirQualityController {
 
         for(int i=1; i<minForecastDays; i++){
             String day = cityaq.getO3().get(3+i*4).split(":")[1].replace("\"","");
-            forecast.put( (String) day, new String[]{
+            forecast.put(day, new String[]{
                     cityaq.getO3().get(i*4).split(":")[1],
                     cityaq.getPm10().get(i*4).split(":")[1],
                     cityaq.getPm25().get(i*4).split(":")[1],

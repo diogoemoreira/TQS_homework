@@ -16,8 +16,6 @@ public class CityAQ {
     private List<String> pm25;
     private List<String> uvi;
 
-    private int minForecast; //used to know which has the min number of days between o3,pm10,pm25,uvi
-
     public CityAQ(){
     }
 
@@ -58,17 +56,18 @@ public class CityAQ {
     }
 
     public int getMinForecast() {
-        minForecast=999;
-        if (minForecast> o3.size())
+        //used to know which has the min number of days between o3,pm10,pm25,uvi
+        int minForecast = 999;
+        if (minForecast > o3.size())
             minForecast = o3.size();
-        if (minForecast> pm10.size())
+        if (minForecast > pm10.size())
             minForecast = pm10.size();
-        if (minForecast> pm25.size())
+        if (minForecast > pm25.size())
             minForecast = pm25.size();
-        if (minForecast> uvi.size())
+        if (minForecast > uvi.size())
             minForecast = uvi.size();
 
-        return minForecast/4;
+        return minForecast /4;
     }
 
     public void setName(String name) {
@@ -91,19 +90,19 @@ public class CityAQ {
     }
 
     public void setO3(String o3) {
-        this.o3 =  Arrays.asList(o3.substring(1,o3.length()-1).replaceAll("\\{|\\}", "").split(","));
+        this.o3 =  Arrays.asList(o3.substring(1,o3.length()-1).replaceAll("[{}]", "").split(","));
     }
 
     public void setPm10(String pm10) {
-        this.pm10 =  Arrays.asList(pm10.substring(1,pm10.length()-1).replaceAll("\\{|\\}", "").split(","));
+        this.pm10 =  Arrays.asList(pm10.substring(1,pm10.length()-1).replaceAll("[{}]", "").split(","));
     }
 
     public void setPm25(String pm25) {
-        this.pm25 =  Arrays.asList(pm25.substring(1,pm25.length()-1).replaceAll("\\{|\\}", "").split(","));
+        this.pm25 =  Arrays.asList(pm25.substring(1,pm25.length()-1).replaceAll("[{}]", "").split(","));
     }
 
     public void setUvi(String uvi) {
-        this.uvi =  Arrays.asList(uvi.substring(1,uvi.length()-1).replaceAll("\\{|\\}", "").split(","));
+        this.uvi =  Arrays.asList(uvi.substring(1,uvi.length()-1).replaceAll("[{}]", "").split(","));
     }
 
     @Override

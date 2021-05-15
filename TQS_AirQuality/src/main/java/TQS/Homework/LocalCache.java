@@ -6,14 +6,13 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class LocalCache {
-    private int ttl=20;
     private static TtlHashMap<String, CityAQ> logs;
     private int countOfReq = 0;
     private int hits = 0;
     private int misses = 0;
 
     LocalCache(){
-        logs = new TtlHashMap<>(TimeUnit.SECONDS, this.ttl);
+        logs = new TtlHashMap<>(TimeUnit.SECONDS, 20);
     }
 
     LocalCache(int newttl){

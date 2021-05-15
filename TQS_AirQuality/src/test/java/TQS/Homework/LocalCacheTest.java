@@ -3,7 +3,6 @@ package TQS.Homework;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -35,14 +34,13 @@ class LocalCacheTest {
         when(aqService.getCity()).thenReturn(newCity);
         cache.addCache("NewCity",aqService.getCity());
 
-        assertEquals(true, cache.hasCity("NewCity"));
-        verify(aqService, times(1)).getCity();
+        assertTrue(cache.hasCity("NewCity"));
     }
 
     @DisplayName("Confirming if city exists")
     @Test
     void hasCity() {
-        assertEquals(true, cache.hasCity("Test"));
+        assertTrue(cache.hasCity("Test"));
     }
 
     @DisplayName("retrieve city from cache")
