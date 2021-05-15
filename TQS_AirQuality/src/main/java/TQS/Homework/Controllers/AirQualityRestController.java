@@ -1,5 +1,8 @@
-package TQS.Homework;
+package TQS.Homework.Controllers;
 
+import TQS.Homework.CityAQ;
+import TQS.Homework.CityAqService;
+import TQS.Homework.LocalCache;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
